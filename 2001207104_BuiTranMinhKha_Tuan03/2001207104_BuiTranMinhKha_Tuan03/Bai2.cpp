@@ -16,7 +16,7 @@ void sapXepDuongCheoChinh(ArrPtr& a, int n);
 void xoaMaTran(ArrPtr& a, int n);
 void sapXepDuongCheoPhu(ArrPtr& a, int n, bool tangDan);
 void sapXepDong(ArrPtr& a, int n);
-
+void sapXepCot(ArrPtr& a, int n);
 
 int main() {
     menu();
@@ -112,6 +112,14 @@ void menu() {
         case 8:
             if (a != nullptr) {
                 sapXepDong(a, n);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 9:
+            if (a != nullptr) {
+                sapXepCot(a, n);
             }
             else {
                 printf("Chua tao ma tran.\n");
@@ -316,6 +324,28 @@ void sapXepDong(ArrPtr& a, int n) {
     }
 
     printf("Ma tran sau khi sap xep dong:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void sapXepCot(ArrPtr& a, int n) {
+    for (int j = 0; j < n; j++) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int k = 0; k < n - 1 - i; k++) {
+                if ((j % 2 == 0 && a[k][j] > a[k + 1][j]) || (j % 2 != 0 && a[k][j] < a[k + 1][j])) {
+                    int tmp = a[k][j];
+                    a[k][j] = a[k + 1][j];
+                    a[k + 1][j] = tmp;
+                }
+            }
+        }
+    }
+
+    printf("Ma tran sau khi sap xep cot:\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%4d", a[i][j]);
