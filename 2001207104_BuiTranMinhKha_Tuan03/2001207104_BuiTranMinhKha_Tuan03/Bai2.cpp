@@ -18,6 +18,7 @@ void sapXepDuongCheoPhu(ArrPtr& a, int n, bool tangDan);
 void sapXepDong(ArrPtr& a, int n);
 void sapXepCot(ArrPtr& a, int n);
 void sapXepDuongCheoVaSongSong(ArrPtr& a, int n);
+void chiaPhanTuChanLe(ArrPtr& a, int n);
 
 
 int main() {
@@ -130,6 +131,14 @@ void menu() {
         case 10:
             if (a != nullptr) {
                 sapXepDuongCheoVaSongSong(a, n);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 11:
+            if (a != nullptr) {
+                chiaPhanTuChanLe(a, n);
             }
             else {
                 printf("Chua tao ma tran.\n");
@@ -400,4 +409,70 @@ void sapXepDuongCheoVaSongSong(ArrPtr& a, int n) {
     }
 
     delete[] temp;
+}
+
+void chiaPhanTuChanLe(ArrPtr& a, int n) {
+    int* even = new int[n * n];
+    int* odd = new int[n * n];
+    int eIndex = 0, oIndex = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[i][j] % 2 == 0) {
+                even[eIndex++] = a[i][j];
+            }
+            else {
+                odd[oIndex++] = a[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < eIndex - 1; i++) {
+        for (int j = 0; j < eIndex - 1 - i; j++) {
+            if (even[j] > even[j + 1]) {
+                int tmp = even[j];
+                even[j] = even[j + 1];
+                even[j + 1] = tmp;
+            }
+        }
+    }
+
+    for (int i = 0; i < oIndex - 1; i++) {
+        for (int j = 0; j < oIndex - 1 - i; j++) {
+            if (odd[j] > odd[j + 1]) {
+                int tmp = odd[j];
+                odd[j] = odd[j + 1];
+                odd[j + 1] = tmp;
+            }
+        }
+    }
+
+    eIndex = 0;
+    for (int i = 0; i < n / 2; i++) {
+        for (int j = 0; j < n; j++) {
+            if (eIndex < eIndex) {
+                a[i][j] = even[eIndex++];
+            }
+        }
+    }
+
+    oIndex = 0;
+    for (int i = n / 2; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (oIndex < oIndex) {
+                a[i][j] = odd[oIndex++];
+            }
+        }
+    }
+
+    printf("Ma tran sau khi chia phan tu chan le:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    delete[] even;
+    delete[] odd;
 }
