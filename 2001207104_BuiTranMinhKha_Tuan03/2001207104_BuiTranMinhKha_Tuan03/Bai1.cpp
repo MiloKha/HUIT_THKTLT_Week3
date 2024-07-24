@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h> 
+
 typedef int ItemType;
 typedef ItemType* ArrPtr;
 
@@ -12,6 +13,7 @@ void nhapMang2C_SoNguyen(ArrPtr*& a, ItemType& m, ItemType& n);
 void taoNgauNhienMang2C_SoNguyen(ArrPtr*& a, ItemType& m, ItemType& n);
 void xuatMang2C_SoNguyen(ArrPtr*& a, ItemType m, ItemType n);
 void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n);
+void xuatMaxTrenTungCot(ArrPtr* a, int m, int n);
 
 
 
@@ -41,6 +43,14 @@ int main() {
         case 2:
             if (a != NULL) {
                 tinhTongGiaTriTungDong(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
+        case 3:
+            if (a != NULL) {
+                xuatMaxTrenTungCot(a, m, n);
             }
             else {
                 printf("Ma tran chua duoc tao.\n");
@@ -123,5 +133,17 @@ void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n) {
             sum += a[i][j];
         }
         printf("Tong gia tri dong %d: %d\n", i, sum);
+    }
+}
+
+void xuatMaxTrenTungCot(ArrPtr* a, int m, int n) {
+    for (int j = 0; j < n; j++) {
+        int vmax = a[0][j];
+        for (int i = 1; i < m; i++) {
+            if (a[i][j] > vmax) {
+                vmax = a[i][j];
+            }
+        }
+        printf("Gia tri lon nhat tren cot %d: %d\n", j, vmax);
     }
 }
