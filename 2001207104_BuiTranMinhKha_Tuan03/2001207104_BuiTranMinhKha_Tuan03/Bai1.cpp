@@ -16,6 +16,7 @@ void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n);
 void xuatMaxTrenTungCot(ArrPtr* a, int m, int n);
 void xuatPhanTuDuongBien(ArrPtr* a, int m, int n);
 void xuatPhanTuCucDai(ArrPtr* a, int m, int n);
+void xuatPhanTuHoangHau(ArrPtr* a, int m, int n);
 
 
 
@@ -69,6 +70,14 @@ int main() {
         case 5:
             if (a != NULL) {
                 xuatPhanTuCucDai(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
+        case 6:
+            if (a != NULL) {
+                xuatPhanTuHoangHau(a, m, n);
             }
             else {
                 printf("Ma tran chua duoc tao.\n");
@@ -208,4 +217,27 @@ void xuatPhanTuCucDai(ArrPtr* a, int m, int n) {
     printf("\n");
 }
 
+void xuatPhanTuHoangHau(ArrPtr* a, int m, int n) {
+    printf("Cac phan tu hoang hau:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            int vmax = a[i][j];
+            int k;
+            for (k = 0; k < n; k++) {
+                if (a[i][k] > vmax) 
+                    break;
+            }
+            if (k == n) {
+                for (k = 0; k < m; k++) {
+                    if (a[k][j] > vmax) 
+                        break;
+                }
+                if (k == m) {
+                    printf("%4d", a[i][j]);
+                }
+            }
+        }
+    }
+    printf("\n");
+}
 
