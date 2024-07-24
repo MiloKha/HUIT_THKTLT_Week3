@@ -11,6 +11,8 @@ void nhapSoNguyenDuong(int& x);
 void nhapMang2C_SoNguyen(ArrPtr*& a, ItemType& m, ItemType& n);
 void taoNgauNhienMang2C_SoNguyen(ArrPtr*& a, ItemType& m, ItemType& n);
 void xuatMang2C_SoNguyen(ArrPtr*& a, ItemType m, ItemType n);
+void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n);
+
 
 
 int main() {
@@ -36,7 +38,14 @@ int main() {
             taoNgauNhienMang2C_SoNguyen(a, m, n);
             xuatMang2C_SoNguyen(a, m, n);
             break;
-        
+        case 2:
+            if (a != NULL) {
+                tinhTongGiaTriTungDong(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
         case 0:
             deleteArrayPoiter(a, m, n);
             printf("Thoat chuong trinh.\n");
@@ -104,5 +113,15 @@ void xuatMang2C_SoNguyen(ArrPtr*& a, ItemType m, ItemType n) {
             printf("%4d", a[i][j]);
         }
         printf("\n");
+    }
+}
+
+void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n) {
+    for (int i = 0; i < m; i++) {
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+            sum += a[i][j];
+        }
+        printf("Tong gia tri dong %d: %d\n", i, sum);
     }
 }
