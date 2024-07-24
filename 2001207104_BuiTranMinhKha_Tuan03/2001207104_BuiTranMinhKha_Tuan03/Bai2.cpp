@@ -10,6 +10,8 @@ void taoNgauNhienMaTranVuong(ArrPtr& a, int n);
 void menu();
 void xuatDuongCheoChinh(ArrPtr a, int n);
 void xuatDuongCheoSongSong(ArrPtr a, int n);
+int timMaxTamGiacTren(ArrPtr a, int n);
+
 
 
 int main() {
@@ -56,6 +58,15 @@ void menu() {
         case 3:
             if (a != nullptr) {
                 xuatDuongCheoSongSong(a, n);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 4:
+            if (a != nullptr) {
+                int max = timMaxTamGiacTren(a, n);
+                printf("Phan tu lon nhat trong tam giac tren la: %d\n", max);
             }
             else {
                 printf("Chua tao ma tran.\n");
@@ -114,4 +125,16 @@ void xuatDuongCheoSongSong(ArrPtr a, int n) {
         }
         printf("\n");
     }
+}
+
+int timMaxTamGiacTren(ArrPtr a, int n) {
+    int max = a[0][1];
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i][j] > max) {
+                max = a[i][j];
+            }
+        }
+    }
+    return max;
 }
