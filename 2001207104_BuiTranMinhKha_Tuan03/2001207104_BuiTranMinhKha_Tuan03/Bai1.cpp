@@ -14,6 +14,7 @@ void taoNgauNhienMang2C_SoNguyen(ArrPtr*& a, ItemType& m, ItemType& n);
 void xuatMang2C_SoNguyen(ArrPtr*& a, ItemType m, ItemType n);
 void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n);
 void xuatMaxTrenTungCot(ArrPtr* a, int m, int n);
+void xuatPhanTuDuongBien(ArrPtr* a, int m, int n);
 
 
 
@@ -51,6 +52,14 @@ int main() {
         case 3:
             if (a != NULL) {
                 xuatMaxTrenTungCot(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
+        case 4:
+            if (a != NULL) {
+                xuatPhanTuDuongBien(a, m, n);
             }
             else {
                 printf("Ma tran chua duoc tao.\n");
@@ -146,4 +155,13 @@ void xuatMaxTrenTungCot(ArrPtr* a, int m, int n) {
         }
         printf("Gia tri lon nhat tren cot %d: %d\n", j, vmax);
     }
+}
+
+void xuatPhanTuDuongBien(ArrPtr* a, int m, int n) {
+    printf("Cac phan tu tren duong bien:\n");
+    for (int j = 0; j < n; j++) printf("%4d", a[0][j]); // tren
+    for (int j = n - 1; j >= 0; j--) printf("%4d", a[m - 1][j]); // duoi
+    for (int i = m - 2; i > 0; i--) printf("%4d", a[i][0]); // trai
+    for (int i = 1; i < m - 1; i++) printf("%4d", a[i][n - 1]); // phai
+    printf("\n");
 }
