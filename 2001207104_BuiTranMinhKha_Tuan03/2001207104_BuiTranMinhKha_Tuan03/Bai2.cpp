@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
@@ -11,6 +11,7 @@ void menu();
 void xuatDuongCheoChinh(ArrPtr a, int n);
 void xuatDuongCheoSongSong(ArrPtr a, int n);
 int timMaxTamGiacTren(ArrPtr a, int n);
+void sapXepZicZac(ArrPtr& a, int n);
 
 
 
@@ -67,6 +68,14 @@ void menu() {
             if (a != nullptr) {
                 int max = timMaxTamGiacTren(a, n);
                 printf("Phan tu lon nhat trong tam giac tren la: %d\n", max);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 5:
+            if (a != nullptr) {
+                sapXepZicZac(a, n);
             }
             else {
                 printf("Chua tao ma tran.\n");
@@ -137,4 +146,47 @@ int timMaxTamGiacTren(ArrPtr a, int n) {
         }
     }
     return max;
+}
+
+void sapXepZicZac(ArrPtr& a, int n) {
+    int* temp = new int[n * n];
+    int index = 0;
+
+    // Copy các phần tử ma trận vào temp
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            temp[index++] = a[i][j];
+        }
+    }
+
+    // Simple bubble sort để phân loại zig-zag
+    for (int i = 0; i < n * n - 1; i++) {
+        for (int j = 0; j < n * n - 1 - i; j++) {
+            if (temp[j] > temp[j + 1]) {
+                // Swap temp[j] and temp[j + 1]
+                int tmp = temp[j];
+                temp[j] = temp[j + 1];
+                temp[j + 1] = tmp;
+            }
+        }
+    }
+
+    // Copy trở lại ma trận
+    index = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i][j] = temp[index++];
+        }
+    }
+
+
+    printf("Ma tran sau khi sap xep zic zac:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    delete[] temp;
 }
