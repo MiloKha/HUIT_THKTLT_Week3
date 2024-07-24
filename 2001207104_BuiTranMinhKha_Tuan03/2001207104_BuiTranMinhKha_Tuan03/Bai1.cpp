@@ -21,7 +21,9 @@ int timMin_DongK(ArrPtr* a, int m, int n, int k);
 int timMax_CotK(ArrPtr* a, int m, int n, int k);
 void lietKePhanTuYenNgua(ArrPtr* a, int m, int n);
 void xuatDongChiChuaSoChan(ArrPtr* a, int m, int n);
-
+void sapXep_TangDan_DongK(ArrPtr*& a, int m, int n, int k);
+void sapXep_TangDan_TungDong(ArrPtr*& a, int m, int n);
+void hoanVi(ItemType& x, ItemType& y);
 
 int main() {
     ArrPtr* a = NULL; 
@@ -97,6 +99,15 @@ int main() {
         case 8:
             if (a != NULL) {
                 xuatDongChiChuaSoChan(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
+        case 9:
+            if (a != NULL) {
+                sapXep_TangDan_TungDong(a, m, n);
+                xuatMang2C_SoNguyen(a, m, n);
             }
             else {
                 printf("Ma tran chua duoc tao.\n");
@@ -317,5 +328,27 @@ void xuatDongChiChuaSoChan(ArrPtr* a, int m, int n) {
             }
             printf("\n");
         }
+    }
+}
+
+void hoanVi(ItemType& x, ItemType& y) {
+    ItemType temp = x;
+    x = y;
+    y = temp;
+}
+
+void sapXep_TangDan_DongK(ArrPtr*& a, int m, int n, int k) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[k][i] > a[k][j]) {
+                hoanVi(a[k][i], a[k][j]);
+            }
+        }
+    }
+}
+
+void sapXep_TangDan_TungDong(ArrPtr*& a, int m, int n) {
+    for (int i = 0; i < m; i++) {
+        sapXep_TangDan_DongK(a, m, n, i);
     }
 }
