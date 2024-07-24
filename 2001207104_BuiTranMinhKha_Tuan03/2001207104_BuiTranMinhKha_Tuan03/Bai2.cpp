@@ -15,6 +15,7 @@ void sapXepZicZac(ArrPtr& a, int n);
 void sapXepDuongCheoChinh(ArrPtr& a, int n);
 void xoaMaTran(ArrPtr& a, int n);
 void sapXepDuongCheoPhu(ArrPtr& a, int n, bool tangDan);
+void sapXepDong(ArrPtr& a, int n);
 
 
 int main() {
@@ -103,6 +104,14 @@ void menu() {
                 int tangDan;
                 scanf_s("%d", &tangDan);
                 sapXepDuongCheoPhu(a, n, tangDan == 0);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 8:
+            if (a != nullptr) {
+                sapXepDong(a, n);
             }
             else {
                 printf("Chua tao ma tran.\n");
@@ -291,4 +300,26 @@ void sapXepDuongCheoPhu(ArrPtr& a, int n, bool tangDan) {
     }
 
     delete[] diag;
+}
+
+void sapXepDong(ArrPtr& a, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - 1; j++) {
+            for (int k = 0; k < n - 1 - j; k++) {
+                if ((i % 2 == 0 && a[i][k] < a[i][k + 1]) || (i % 2 != 0 && a[i][k] > a[i][k + 1])) {
+                    int tmp = a[i][k];
+                    a[i][k] = a[i][k + 1];
+                    a[i][k + 1] = tmp;
+                }
+            }
+        }
+    }
+
+    printf("Ma tran sau khi sap xep dong:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
 }
