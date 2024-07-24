@@ -14,7 +14,7 @@ int timMaxTamGiacTren(ArrPtr a, int n);
 void sapXepZicZac(ArrPtr& a, int n);
 void sapXepDuongCheoChinh(ArrPtr& a, int n);
 void xoaMaTran(ArrPtr& a, int n);
-void menu();
+void sapXepDuongCheoPhu(ArrPtr& a, int n, bool tangDan);
 
 
 int main() {
@@ -30,12 +30,18 @@ void menu() {
     do {
         printf("\nMenu:\n");
         printf("1. Tao/xuat ma tran vuong\n");
-        printf("2. Xuat cac phan tu tren duong cheo chinh\n");
-        printf("3. Xuat cac phan tu thuoc duong cheo song song duong cheo chinh\n");
-        printf("4. Tim phan tu max thuoc tam giac tren cua duong cheo chinh\n");
-        printf("5. Sap xep ma tran theo kien zic zac\n");
+        printf("2. Xuat duong cheo chinh\n");
+        printf("3. Xuat duong cheo song song\n");
+        printf("4. Tim phan tu max tam giac tren\n");
+        printf("5. Sap xep ma tran zic zac\n");
         printf("6. Sap xep duong cheo chinh\n");
-        printf("7. Thoat\n");
+        printf("7. Sap xep duong cheo phu\n");
+        printf("8. Sap xep dong\n");
+        printf("9. Sap xep cot\n");
+        printf("10. Sap xep duong cheo va song song\n");
+        printf("11. Chia phan tu chan le\n");
+        printf("12. Kiem tra doi xung qua duong cheo chinh\n");
+        printf("13. Thoat\n");
         printf("Chon chuc nang: ");
         scanf_s("%d", &choice);
 
@@ -92,6 +98,17 @@ void menu() {
             }
             break;
         case 7:
+            if (a != nullptr) {
+                printf("Sap xep duong cheo phu tang dan (0) hay giam dan (1)? ");
+                int tangDan;
+                scanf_s("%d", &tangDan);
+                sapXepDuongCheoPhu(a, n, tangDan == 0);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 13:
             xoaMaTran(a, n);
             printf("Thoat chuong trinh.\n");
             break;
@@ -242,4 +259,36 @@ void xoaMaTran(ArrPtr& a, int n) {
         delete[] a[i];
     }
     delete[] a;
+}
+
+void sapXepDuongCheoPhu(ArrPtr& a, int n, bool tangDan) {
+    int* diag = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        diag[i] = a[i][n - 1 - i];
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if ((tangDan && diag[j] > diag[j + 1]) || (!tangDan && diag[j] < diag[j + 1])) {
+                int tmp = diag[j];
+                diag[j] = diag[j + 1];
+                diag[j + 1] = tmp;
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        a[i][n - 1 - i] = diag[i];
+    }
+
+    printf("Ma tran sau khi sap xep duong cheo phu (%s):\n", tangDan ? "tang dan" : "giam dan");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    delete[] diag;
 }
