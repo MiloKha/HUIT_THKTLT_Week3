@@ -12,7 +12,9 @@ void xuatDuongCheoChinh(ArrPtr a, int n);
 void xuatDuongCheoSongSong(ArrPtr a, int n);
 int timMaxTamGiacTren(ArrPtr a, int n);
 void sapXepZicZac(ArrPtr& a, int n);
-
+void sapXepDuongCheoChinh(ArrPtr& a, int n);
+void xoaMaTran(ArrPtr& a, int n);
+void menu();
 
 
 int main() {
@@ -80,6 +82,18 @@ void menu() {
             else {
                 printf("Chua tao ma tran.\n");
             }
+            break;
+        case 6:
+            if (a != nullptr) {
+                sapXepDuongCheoChinh(a, n);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
+        case 7:
+            xoaMaTran(a, n);
+            printf("Thoat chuong trinh.\n");
             break;
         default:
             printf("Lua chon khong hop le.\n");
@@ -189,4 +203,43 @@ void sapXepZicZac(ArrPtr& a, int n) {
     }
 
     delete[] temp;
+}
+
+void sapXepDuongCheoChinh(ArrPtr& a, int n) {
+    int* diag = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        diag[i] = a[i][i];
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (diag[j] > diag[j + 1]) {
+                int tmp = diag[j];
+                diag[j] = diag[j + 1];
+                diag[j + 1] = tmp;
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        a[i][i] = diag[i];
+    }
+
+    printf("Ma tran sau khi sap xep duong cheo chinh:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    delete[] diag;
+}
+
+void xoaMaTran(ArrPtr& a, int n) {
+    for (int i = 0; i < n; i++) {
+        delete[] a[i];
+    }
+    delete[] a;
 }
