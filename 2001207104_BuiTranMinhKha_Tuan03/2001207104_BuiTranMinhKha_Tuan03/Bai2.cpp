@@ -9,6 +9,8 @@ typedef ItemType** ArrPtr;
 void taoNgauNhienMaTranVuong(ArrPtr& a, int n);
 void menu();
 void xuatDuongCheoChinh(ArrPtr a, int n);
+void xuatDuongCheoSongSong(ArrPtr a, int n);
+
 
 int main() {
     menu();
@@ -51,6 +53,14 @@ void menu() {
                 printf("Chua tao ma tran.\n");
             }
             break;
+        case 3:
+            if (a != nullptr) {
+                xuatDuongCheoSongSong(a, n);
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
         default:
             printf("Lua chon khong hop le.\n");
             break;
@@ -86,4 +96,22 @@ void xuatDuongCheoChinh(ArrPtr a, int n) {
         printf("%4d", a[i][i]);
     }
     printf("\n");
+}
+
+void xuatDuongCheoSongSong(ArrPtr a, int n) {
+    printf("Cac phan tu thuoc duong cheo song song duong cheo chinh:\n");
+
+    for (int k = 1; k < n; k++) {
+        for (int i = 0, j = k; j < n; i++, j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int k = 1; k < n; k++) {
+        for (int i = k, j = 0; i < n; i++, j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
 }
