@@ -19,7 +19,7 @@ void sapXepDong(ArrPtr& a, int n);
 void sapXepCot(ArrPtr& a, int n);
 void sapXepDuongCheoVaSongSong(ArrPtr& a, int n);
 void chiaPhanTuChanLe(ArrPtr& a, int n);
-
+bool kiemTraDoiXung(ArrPtr a, int n);
 
 int main() {
     menu();
@@ -144,6 +144,19 @@ void menu() {
                 printf("Chua tao ma tran.\n");
             }
             break;
+        case 12:
+            if (a != nullptr) {
+                if (kiemTraDoiXung(a, n)) {
+                    printf("Ma tran doi xung qua duong cheo chinh.\n");
+                }
+                else {
+                    printf("Ma tran khong doi xung qua duong cheo chinh.\n");
+                }
+            }
+            else {
+                printf("Chua tao ma tran.\n");
+            }
+            break;
         case 13:
             xoaMaTran(a, n);
             printf("Thoat chuong trinh.\n");
@@ -152,7 +165,7 @@ void menu() {
             printf("Lua chon khong hop le.\n");
             break;
         }
-    } while (choice != 7);
+    } while (choice != 13);
 }
 
 void taoNgauNhienMaTranVuong(ArrPtr& a, int n) {
@@ -475,4 +488,15 @@ void chiaPhanTuChanLe(ArrPtr& a, int n) {
 
     delete[] even;
     delete[] odd;
+}
+
+bool kiemTraDoiXung(ArrPtr a, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[i][j] != a[j][i]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
