@@ -20,6 +20,7 @@ void xuatPhanTuHoangHau(ArrPtr* a, int m, int n);
 int timMin_DongK(ArrPtr* a, int m, int n, int k);
 int timMax_CotK(ArrPtr* a, int m, int n, int k);
 void lietKePhanTuYenNgua(ArrPtr* a, int m, int n);
+void xuatDongChiChuaSoChan(ArrPtr* a, int m, int n);
 
 
 int main() {
@@ -88,6 +89,14 @@ int main() {
         case 7:
             if (a != NULL) {
                 lietKePhanTuYenNgua(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
+        case 8:
+            if (a != NULL) {
+                xuatDongChiChuaSoChan(a, m, n);
             }
             else {
                 printf("Ma tran chua duoc tao.\n");
@@ -251,7 +260,6 @@ void xuatPhanTuHoangHau(ArrPtr* a, int m, int n) {
     printf("\n");
 }
 
-
 int timMin_DongK(ArrPtr* a, int m, int n, int k) {
     int vmin = a[k][0];
     for (int j = 1; j < n; j++) {
@@ -271,7 +279,6 @@ int timMax_CotK(ArrPtr* a, int m, int n, int k) {
     }
     return vmax;
 }
-
 
 void lietKePhanTuYenNgua(ArrPtr* a, int m, int n) {
     printf("Cac phan tu yen ngua:\n");
@@ -297,3 +304,18 @@ void lietKePhanTuYenNgua(ArrPtr* a, int m, int n) {
     }
 }
 
+void xuatDongChiChuaSoChan(ArrPtr* a, int m, int n) {
+    printf("Cac dong chi chua so chan:\n");
+    for (int i = 0; i < m; i++) {
+        int j;
+        for (j = 0; j < n; j++) {
+            if (a[i][j] % 2 != 0) break;
+        }
+        if (j == n) {
+            for (j = 0; j < n; j++) {
+                printf("%4d", a[i][j]);
+            }
+            printf("\n");
+        }
+    }
+}
