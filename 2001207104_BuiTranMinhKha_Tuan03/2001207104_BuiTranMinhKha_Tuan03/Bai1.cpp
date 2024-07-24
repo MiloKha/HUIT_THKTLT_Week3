@@ -15,6 +15,7 @@ void xuatMang2C_SoNguyen(ArrPtr*& a, ItemType m, ItemType n);
 void tinhTongGiaTriTungDong(ArrPtr* a, int m, int n);
 void xuatMaxTrenTungCot(ArrPtr* a, int m, int n);
 void xuatPhanTuDuongBien(ArrPtr* a, int m, int n);
+void xuatPhanTuCucDai(ArrPtr* a, int m, int n);
 
 
 
@@ -60,6 +61,14 @@ int main() {
         case 4:
             if (a != NULL) {
                 xuatPhanTuDuongBien(a, m, n);
+            }
+            else {
+                printf("Ma tran chua duoc tao.\n");
+            }
+            break;
+        case 5:
+            if (a != NULL) {
+                xuatPhanTuCucDai(a, m, n);
             }
             else {
                 printf("Ma tran chua duoc tao.\n");
@@ -165,3 +174,38 @@ void xuatPhanTuDuongBien(ArrPtr* a, int m, int n) {
     for (int i = 1; i < m - 1; i++) printf("%4d", a[i][n - 1]); // phai
     printf("\n");
 }
+
+void xuatPhanTuCucDai(ArrPtr* a, int m, int n) {
+
+    printf("Cac phan tu cuc dai:\n");
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            bool isCucDai = true;
+
+            // ktra tren
+            if (i > 0 && a[i][j] <= a[i - 1][j]) {
+                isCucDai = false;
+            }
+            // ktra duoi
+            if (i < m - 1 && a[i][j] <= a[i + 1][j]) {
+                isCucDai = false;
+            }
+            // ktra trai
+            if (j > 0 && a[i][j] <= a[i][j - 1]) {
+                isCucDai = false;
+            }
+            // ktra phai
+            if (j < n - 1 && a[i][j] <= a[i][j + 1]) {
+                isCucDai = false;
+            }
+
+            if (isCucDai) {
+                printf("%4d", a[i][j]);
+            }
+        }
+    }
+    printf("\n");
+}
+
+
